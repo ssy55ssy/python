@@ -1,0 +1,17 @@
+import xlwt
+import re
+
+with open('.\\python_exercise\\016\\number.txt','r',encoding = 'utf8') as f:
+    data = f.read()
+    print(data)
+    patten = re.compile('\[.+\]')
+    lines = patten.findall(data)
+    print(lines)
+    workbook = xlwt.Workbook()
+    sheet1 = workbook.add_sheet('number', cell_overwrite_ok=True)
+    for row,line in enumerate(lines):
+        patten2 = re.compile('[0-9]+')
+        numbers = patten2.findall(line)
+        for col,number in enumerate(numbers):
+            sheet1.write(row,col,number)
+    workbook.save('.\\python_exercise\\016\\number.xls')
